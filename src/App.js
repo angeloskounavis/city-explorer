@@ -45,7 +45,7 @@ class App extends React.Component {
           <button type="submit">Search for a City</button>
         </from>
         <label>
-          <input name="city type="text" onChange/>
+          <input name="city" type="text" onChange/>
         </label>
         <button type="submit">Get City Data</button>
         <uL>
