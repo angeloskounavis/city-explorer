@@ -21,7 +21,7 @@ class App extends React.Component {
     console.log(swData.data.results);
   }
 
-  HandleInputChange = (e) => {
+  handleInputChange = (e) => {
     this.setState({
       city: e.target.value
     });
@@ -40,7 +40,7 @@ class App extends React.Component {
         <h1>City Explorer</h1>
         <from onSubmit={this.handleSubmit}>
           <label>Search for a City
-            <input type="text" name="city" onChange={this.HandleInputChange} />
+            <input type="text" name="city" onChange={this.handleInputChange} />
           </label>
           <button type="submit">Search for a City</button>
         </from>
@@ -48,9 +48,9 @@ class App extends React.Component {
           <input name="city" type="text" onChange/>
         </label>
         <button type="submit">Get City Data</button>
-        <uL>
-          {swCharacters}
-        </uL>
+        {/* <uL> */}
+          {/* {swCharacters} */}
+        {/* </uL> */}
       </>
     )
   }
