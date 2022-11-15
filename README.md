@@ -101,3 +101,5 @@ Start time: 4pm
 Finish time: 10pm
 
 Actual time needed to complete: 6 hours
+
+![dataflow](image1.png)
