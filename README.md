@@ -93,12 +93,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-Name of feature: ________________________________
+Name of feature:lab-06 features: render, maps, catch errors
+Estimate of time needed to complete: 4 hours
 
-Estimate of time needed to complete: _____
+Start time: 4pm
 
-Start time: _____
+Finish time: 10pm
 
-Finish time: _____
-
-Actual time needed to complete: _____
+Actual time needed to complete: 6 hours
