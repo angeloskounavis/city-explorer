@@ -103,3 +103,15 @@ Finish time: 10pm
 Actual time needed to complete: 6 hours
 
 ![dataflow](image1.png)
+
+Name of feature: lab-8, include weather and movies
+
+Estimate of time needed to complete: 4 hours
+
+Start time: 4pm
+
+Finish time: I haven't finished yet I just completed the previous lab(07)
+
+Actual time needed to complete: 9pm
+
+![dataflow](image2.png)
