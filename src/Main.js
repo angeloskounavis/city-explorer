@@ -5,6 +5,7 @@ import CitySearch from './CitySearch'
 import Map from './Map'
 import Weather from './Weather'
 import LatLon from './LatLon'
+import Movies from './Movies'
 
 class Main extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class Main extends React.Component {
       latitude: '',
       longitude: '',
       searchQuery: '',
-      weather: []
+      weather: [],
+      movies: [],
     }
   }
 
@@ -46,13 +48,31 @@ class Main extends React.Component {
         errorMessage: error.message.status + ': ' + error.response.data.error
       });
     }
-      this.displayWeather(location.data[0].lat, location.data[0].lon)
+    // this.displayWeather(location.data[0].lat, location.data[0].lon)
+    this.displayWeather();
+    this.getMovies();
     }
     displayWeather = async (lat, lon) => {
       try {
         const weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather`, { params: { latitude: lat, longitude: lon, searchQuery: this.state.searchQuery } });
         this.setState({
           weather: weather.data
+        });
+      } catch (error) {
+        this.setState({
+          displayMap: false,
+          displayError: true,
+          errorMessage: error.message.status + ': ' + error.response.data.error
+        });
+      }
+    }
+
+
+    getMovies = async () => {
+      try {
+        const movies = await axios.get(`${process.env.REACT_APP_SERVER}/movies`, { params: { city: this.state.searchQuery } });
+        this.setState({
+          movies: movies.data
         });
       } catch (error) {
         this.setState({
@@ -102,6 +122,13 @@ class Main extends React.Component {
                   <Col>
                     <Weather
                       weather={this.state.weather}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Movies
+                      movies={this.state.movies}
                     />
                   </Col>
                 </Row>
