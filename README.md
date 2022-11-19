@@ -115,3 +115,12 @@ Finish time: I haven't finished yet I just completed the previous lab(07)
 Actual time needed to complete: 9pm
 
 ![dataflow](image2.png)
+
+Name of feature:; lab8, lab 9, lab 10
+
+Estimate of time needed to complete: 4
+
+Start time: 4pm
+Finish time: 7pm
+
+Actual time needed to complete: 3 hours but I haven't finished all labs
