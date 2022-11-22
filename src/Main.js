@@ -7,6 +7,11 @@ import Weather from './Weather'
 import LatLon from './LatLon'
 import Movies from './Movies'
 
+const storage = {};
+console.log({ storage });
+
+
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -27,34 +32,47 @@ class Main extends React.Component {
       searchQuery: e.target.value
     });
   }
-  displayLatLon = async (event) => {
-    const url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.searchQuery}&format=json`;
 
-    let location;
+  displayLatLon = async () => {
+    if (storage[this.state.searchQuery] === undefined) {
+      console.log('finding location from api')
+      const url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.searchQuery}&format=json`;
 
-    try {
-      location = await axios.get(url)
-      this.setState({
-        location: location.data[0].display_name,
-        latitude: location.data[0].lat,
-        longitude: location.data[0].lon,
-        displayMap: true,
-        displayError: false
-      });
-    } catch (error) {
-      this.setState({
-        displayMap: false,
-        displayError: true,
-        errorMessage: error.message.status + ': ' + error.response.data.error
-      });
-    }
-    // this.displayWeather(location.data[0].lat, location.data[0].lon)
-    this.displayWeather();
-    this.getMovies();
-    }
-    displayWeather = async (lat, lon) => {
+      let location;
       try {
-        const weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather`, { params: { latitude: lat, longitude: lon, searchQuery: this.state.searchQuery } });
+        location = await axios.get(url);
+        console.log('got the location', { location })
+        this.setState({
+          location: location.data[0].display_name,
+          latitude: location.data[0].lat,
+          longitude: location.data[0].lon,
+          displayMap: true,
+          displayError: false });
+          storage[this.state.searchQuery] = location.data[0];
+      } catch (error) {
+        this.setState({
+          displayMap: false,
+          displayError: true,
+          errorMessage: error.message.status + ': ' + error.response.data.error});
+        }
+      } else {
+        console.log('getting information from storage');
+        this.setState({
+          location: storage[this.state.searchQuery].display_name,
+          latitude: storage[this.state.searchQuery].lat,
+          longitude: storage[this.state.searchQuery].lon,
+          displayMap: true,
+          displayError: false
+        })
+      }
+
+      // this.displayWeather(location.data[0].lat, location.data[0].lon)
+      this.getWeather();
+      this.getMovies();
+    }
+    getWeather = async () => {
+      try {
+        const weather = await axios.get(`${process.env.REACT_APP_SERVER}/weather`, { params: { lat: this.state.latitude, lon: this.state.longitude} });
         this.setState({
           weather: weather.data
         });
